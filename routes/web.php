@@ -25,9 +25,23 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/visualizarProjetos', 'UserController@visualizarProjetos')->name('visualizarProjetos');
-    Route::get('/editarProjetos', 'AdminController@editarProjetos')->name('editarProjetos');
+    Route::group(['prefix' => 'editarProjetos'], function () {
+        Route::get('/', 'AdminController@editarProjetos')->name('editarProjetos');
+        Route::post('/editarProjeto', 'AdminController@editarProjeto')->name('editarProjeto');
+        Route::post('/deletarProjeto', 'AdminController@deletarProjeto')->name('deletarProjeto');
+    });
 });
 
 Route::group(['prefix' => 'superAdmin', 'middleware' => 'auth'], function () {
     Route::get('/visualizarProjetos', 'UserController@visualizarProjetos')->name('visualizarProjetos');
+    Route::group(['prefix' => 'editarProjetos'], function () {
+        Route::get('/', 'AdminController@editarProjetos')->name('editarProjetos');
+        Route::post('/editarProjeto', 'AdminController@editarProjeto')->name('editarProjeto');
+        Route::post('/deletarProjeto', 'AdminController@deletarProjeto')->name('deletarProjeto');
+    });
+
+    Route::group(['prefix' => 'cadastrarProjetos'], function () {
+        Route::get('/', 'SuperAdminController@cadastrarProjetos')->name('cadastrarProjetos');
+        Route::post('/cadastrarProjeto', 'SuperAdminController@cadastrarProjeto')->name('cadastrarProjeto');
+    });
 });

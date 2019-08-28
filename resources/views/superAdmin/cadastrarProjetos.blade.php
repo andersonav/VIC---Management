@@ -71,56 +71,33 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Visualização de Projetos</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Cadastro de Projetos</h6>
         </div>
         <div class="card-body">
-            <div class="table-responsive">
-                <div id="btnDatatable"></div>
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>ID Projeto</th>
-                            <th>Nome do Projeto</th>
-                            <th>Orçamento</th>
-                            <th>Faturado</th>
-                            <th>Percentagem </th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>ID Projeto</th>
-                            <th>Nome Projeto</th>
-                            <th>Orçamento</th>
-                            <th>Faturado</th>
-                            <th>Percentagem</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @forelse($getProjetos as $projeto)
-                        <tr>
-                            <td>{{$projeto->pro_id}}</td>
-                            <td>{{$projeto->pro_nome}}</td>
-                            <td>{{$projeto->orcamento or '-'}}</td>
+            <div class="col-lg-4">
+                <div class="errors">
 
-                            <td>{{$projeto->faturado or '-'}}</td>
-                            <td>{{$projeto->percentagem or '-'}}</td>
-                        </tr>
-
-                        @empty
-                        <tr colspan="5">
-                            <td>Não há registros</td>
-                        </tr>
-
-                        @endforelse
-
-                    </tbody>
-                </table>
+                </div>
+                <form class="user" method="POST" action="{{ route('cadastrarProjeto') }}">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-user" value="" id="nomeProjeto" aria-describedby="nomeProjeto" placeholder="Nome Projeto" name="nomeProjeto">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                        Cadastrar
+                    </button>
+                    <!-- <a href="index.html" class="btn btn-primary btn-user btn-block">
+                    Login
+                </a> -->
+                </form>
             </div>
+
         </div>
     </div>
     <!-- /.container-fluid -->
 </div>
 
-<script src="{{asset('js/projetos/visualizarProjetos.js')}}"></script>
+<script src="{{asset('js/operacao.js')}}"></script>
+<script src="{{asset('js/projetos/cadastrarProjetos.js')}}"></script>
 
 @endsection
