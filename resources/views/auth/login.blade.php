@@ -8,6 +8,11 @@
             <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
             </div>
+            @if(isset($error))
+            <div class="alert alert-danger" role="alert">
+                {{$error}}
+            </div>
+            @endif
             <form class="user" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
