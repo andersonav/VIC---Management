@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29-Ago-2019 às 19:20
+-- Tempo de geração: 29-Ago-2019 às 22:59
 -- Versão do servidor: 10.3.16-MariaDB
 -- versão do PHP: 7.2.19
 
@@ -73,8 +73,7 @@ INSERT INTO `atividade1` (`ati1_id`, `ati1_codigo`, `at1_nome`, `lot_id`, `creat
 (29, '3.9', 'SINALÉCTICA | SIGNALS', 1, NULL, NULL),
 (30, '4.0', 'MESTRAGEM | FINAL ARRANGEMENTS', 2, NULL, NULL),
 (31, '4.1', 'LIMPEZA FINAL OBRA | FINAL CLEANING WORK', 1, NULL, NULL),
-(32, '2.0', 'Testeeeee', 1, '2019-08-29 17:59:02', '2019-08-29 17:59:02'),
-(33, '2.1', 'Anderson Teste', 1, '2019-08-29 17:59:36', '2019-08-29 17:59:36');
+(32, '2.0', 'Testeeeee', 1, '2019-08-29 17:59:02', '2019-08-29 17:59:02');
 
 -- --------------------------------------------------------
 
@@ -111,10 +110,6 @@ INSERT INTO `atividade2` (`ati2_id`, `ati2_codigo`, `ati2_descricao`, `ati2_prec
 (10, '1.7', 'Em paredes simples constituídas por tijolo de 30x20x11 (E11 de 110mm)', '70', '12', '60', 3, 2, NULL, NULL),
 (11, '1.8', 'dsfdfd', '80', '20', '22', 2, 1, '2019-08-29 09:22:13', '2019-08-29 09:22:13'),
 (12, '1.9', 'sdsdsdsdsd sds', '80', '20', '22', 1, 1, '2019-08-29 09:24:14', '2019-08-29 09:24:14'),
-(13, '2.2', 'Testetetete etet', '80', '20', '22', 33, 1, '2019-08-29 18:02:43', '2019-08-29 18:02:43'),
-(14, '2.2', 'Testetetete etet', '80', '20', '22', 33, 1, '2019-08-29 18:02:43', '2019-08-29 18:02:43'),
-(15, '2.3', 'fdfdddf', '80', '20', '22', 33, 2, '2019-08-29 18:04:20', '2019-08-29 18:04:20'),
-(16, '2.4', 'sfdsfdfdfd', '80', '20', '22', 33, 1, '2019-08-29 18:04:46', '2019-08-29 18:04:46'),
 (17, '2.5', 'dfdfdsgfgf gfg', '80', '20', '22', 1, 1, '2019-08-29 18:29:29', '2019-08-29 18:29:29'),
 (18, '2.8', 'dfdfdf', '80', '20', '22', 1, 1, '2019-08-29 19:59:29', '2019-08-29 19:59:29');
 
@@ -398,8 +393,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`usu_id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `tip_usu_id`) VALUES
-(3, 'Anderson Alves', 'anderson.alvesprogrammer@gmail.com', '$2y$10$xm9ckKgmBwZDpxHW.Pp5qOd/61.O3i/YqgVewzV9os9E.hQlRqgZ2', 'aZxx0HPCIQnbKmPGCgjWir3LkWoj5SFRoDue6fANQsulsCYGIUe4EeEcg4ia', '2019-08-28 05:05:06', '2019-08-28 05:05:06', 1),
-(4, 'Admin', 'admin@gmail.com', '$2y$10$87JPghrSFVvLO6XEBnbdNu8GOYGpoXApjYhIg.qup4CmjZYhTYrd6', 'y6SAmZwkw09avJg6FPAnnWlr3H2ODg314azDY79Z693fMhu1PadyeLsLpOZ7', '2019-08-28 16:44:52', '2019-08-28 16:44:52', 2),
+(3, 'Anderson Alves', 'anderson.alvesprogrammer@gmail.com', '$2y$10$xm9ckKgmBwZDpxHW.Pp5qOd/61.O3i/YqgVewzV9os9E.hQlRqgZ2', 'EyVMt2zEXTNEIpKqGwCnX82aIGW0L8f8y9uZNRu1r1PPWWxBw8XnLSEZbwZG', '2019-08-28 05:05:06', '2019-08-28 05:05:06', 1),
+(4, 'Admin', 'admin@gmail.com', '$2y$10$87JPghrSFVvLO6XEBnbdNu8GOYGpoXApjYhIg.qup4CmjZYhTYrd6', '7HqJsoQYsKO2CokHGHQ2ZVNWA310QiuOINt651m8I2uyqd2j9iLBB7oTs2PZ', '2019-08-28 16:44:52', '2019-08-28 16:44:52', 2),
 (5, 'Usuário', 'user@gmail.com', '$2y$10$6ND07uDQXM.FECWHCb8qcumMC.SAcY9c9/cEgQkqVvLuQriZh9LrG', 'gRQejJiBirrC4OLjVyh3ulyN7gqKpYoFRAZq2pi06igaCIjDUaaCp2Cgq2kZ', '2019-08-28 19:53:34', '2019-08-28 19:53:34', 3),
 (6, 'Alfredo', 'alfredo@gmail.com', '$2y$10$sVizltXfXi213eMF29aCYO8yuw7fD0gbF0skRcPeinfwvpJRzdQPu', 'bX89sCsczoFPg685mZkb2juwHnPAuPZLTlhG8pRCGYnTasE4TiPBXjUf0Mva', '2019-08-29 04:14:44', '2019-08-29 04:14:44', 3);
 
@@ -517,19 +512,19 @@ ALTER TABLE `utilizador`
 -- AUTO_INCREMENT de tabela `atividade1`
 --
 ALTER TABLE `atividade1`
-  MODIFY `ati1_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `ati1_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de tabela `atividade2`
 --
 ALTER TABLE `atividade2`
-  MODIFY `ati2_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ati2_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de tabela `lote`
 --
 ALTER TABLE `lote`
-  MODIFY `lot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `lot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `menu`
@@ -553,7 +548,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de tabela `projeto`
 --
 ALTER TABLE `projeto`
-  MODIFY `pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `pro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de tabela `sub_menu`
@@ -599,20 +594,20 @@ ALTER TABLE `utilizador`
 -- Limitadores para a tabela `atividade1`
 --
 ALTER TABLE `atividade1`
-  ADD CONSTRAINT `fk_atividade_lote1` FOREIGN KEY (`lot_id`) REFERENCES `lote` (`lot_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_atividade_lote1` FOREIGN KEY (`lot_id`) REFERENCES `lote` (`lot_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `atividade2`
 --
 ALTER TABLE `atividade2`
-  ADD CONSTRAINT `fk_atividade2_atividade11` FOREIGN KEY (`ati1_id`) REFERENCES `atividade1` (`ati1_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_atividade2_atividade11` FOREIGN KEY (`ati1_id`) REFERENCES `atividade1` (`ati1_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_atividade2_unidade1` FOREIGN KEY (`uni_id`) REFERENCES `unidade` (`uni_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `lote`
 --
 ALTER TABLE `lote`
-  ADD CONSTRAINT `fk_lote_projeto1` FOREIGN KEY (`pro_id`) REFERENCES `projeto` (`pro_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_lote_projeto1` FOREIGN KEY (`pro_id`) REFERENCES `projeto` (`pro_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `usuario`
