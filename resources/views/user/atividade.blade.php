@@ -74,7 +74,12 @@
             <h6 class="m-0 font-weight-bold text-primary">Visualização da Atividade {{$nomeAtividade or ''}}</h6>
         </div>
         <div class="card-body">
-
+            <a href="{{ route('visualizarAtividades') }}" class="btn btn-primary btn-icon-split" style="float: right;" id="">
+                <span class="icon text-white-50">
+                    <i class="fas fa-chevron-circle-left"></i>
+                </span>
+                <span class="text">Voltar</span>
+            </a>
             <div class="table-responsive">
                 <div id="btnDatatable"></div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

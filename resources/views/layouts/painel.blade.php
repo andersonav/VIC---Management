@@ -80,7 +80,7 @@
             @endphp
             @foreach ($subMenu as $itemSubMenu)
 
-            <a class="collapse-item{{ (request()->is($item->tip_usu_attr .'/'. $rotaSubMenu[$countRota])) ? ' active' : '' }}" href="{{'/'.$item->tip_usu_attr .'/'. $rotaSubMenu[$countRota]}}">{{$itemSubMenu}}</a>
+            <a class="collapse-item{{ (request()->is($rotaSubMenu[$countRota])) ? ' active' : '' }}" href="{{'/'. $rotaSubMenu[$countRota]}}">{{$itemSubMenu}}</a>
             @php
             $countRota++;
             @endphp

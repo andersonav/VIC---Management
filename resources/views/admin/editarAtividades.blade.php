@@ -108,7 +108,14 @@
                             <td>{{$projeto->orcamento or '-'}}</td>
                             <td>{{$projeto->faturado or '-'}}</td>
                             <td>{{$projeto->percentagem or '-'}}</td>
-                            <td><a class="aVer" style="cursor: pointer;" title="Ver" href="{{route('atividadeUnicaAdmin', ['id' => $projeto->ati1_id])}}"><i class="fas fa-plus fa-sm"></i></a>&nbsp;&nbsp;&nbsp;<a class="aEdit" style="cursor: pointer;" title="Editar" onclick="editarAtividade({{$projeto->ati1_id}}, {{$projeto->lot_id}}, '{{$projeto->ati1_codigo}}' ,'{{$projeto->at1_nome}}')"><i class="fas fa-edit fa-sm"></i></a></td>
+                            <td>
+                                <a class="aVer" style="cursor: pointer;" title="Ver" href="{{route('atividadeUnicaAdmin', ['id' => $projeto->ati1_id])}}"><i class="fas fa-plus fa-sm"></i></a>
+                                &nbsp;&nbsp;
+                                <a class="aEdit" style="cursor: pointer;" title="Editar" onclick="editarAtividade({{$projeto->ati1_id}}, {{$projeto->lot_id}}, '{{$projeto->ati1_codigo}}' ,'{{$projeto->at1_nome}}')"><i class="fas fa-edit fa-sm"></i></a>&nbsp;
+                                @if(auth()->user()->tip_usu_id == 1)
+                                <a class="aDel" style="cursor: pointer;" title="Deletar" onclick="deletarAtividade({{$projeto->ati1_id}})"><i class="fas fa-trash fa-sm"></i></a>
+                                @endif
+                            </td>
                         </tr>
                         @empty
                         <tr>
@@ -152,7 +159,6 @@
                         <label for="idLote">Lote</label>
                         <select class="form-control" id="idLote" name="idLote">
                             <option value="">Selecione uma opção</option>
-                            <option value="4">Test</option>
                         </select>
                     </div>
                 </div>

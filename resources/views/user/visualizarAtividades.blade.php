@@ -74,6 +74,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Visualização de Atividades</h6>
         </div>
         <div class="card-body">
+            
             <div class="table-responsive">
                 <div id="btnDatatable"></div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

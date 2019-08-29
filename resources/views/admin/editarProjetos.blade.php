@@ -105,7 +105,14 @@
 
                             <td>{{$projeto->faturado or '-'}}</td>
                             <td>{{$projeto->percentagem or '-'}}</td>
-                            <td><a class="aEdit" style="cursor: pointer;" title="Editar" onclick="editarProjeto({{$projeto->pro_id}}, '{{$projeto->pro_nome}}')"><i class="fas fa-edit fa-sm"></i></a>&nbsp;&nbsp;&nbsp;<a class="aEdit" style="cursor: pointer;" title="Deletar" onclick="deletarProjeto({{$projeto->pro_id}})"><i class="fas fa-trash fa-sm"></i></a></td>
+                            <td>
+                                <a class="aVer" style="cursor: pointer;" title="Ver" href="{{route('visualizarProjetoUnico', ['id' => $projeto->pro_id])}}"><i class="fas fa-eye fa-sm"></i></a>
+                                &nbsp;&nbsp;
+                                <a class="aEdit" style="cursor: pointer;" title="Editar" onclick="editarProjeto({{$projeto->pro_id}}, '{{$projeto->pro_nome}}')"><i class="fas fa-edit fa-sm"></i></a>&nbsp;&nbsp;
+                                @if(auth()->user()->tip_usu_id == 1)
+                                <a class="aDel" style="cursor: pointer;" title="Deletar" onclick="deletarProjeto({{$projeto->pro_id}})"><i class="fas fa-trash fa-sm"></i></a>
+                                @endif
+                            </td>
                         </tr>
 
                         @empty

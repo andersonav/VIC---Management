@@ -11,7 +11,7 @@ $(document).ready(function () {
 function getProjetos() {
     $.ajax({
         type: 'POST',
-        url: "/superAdmin/getProjetos",
+        url: "/getProjetos",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },

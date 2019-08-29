@@ -84,6 +84,7 @@
                             <th>Orçamento</th>
                             <th>Faturado</th>
                             <th>Percentagem </th>
+                            <th>Ver </th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -93,6 +94,7 @@
                             <th>Orçamento</th>
                             <th>Faturado</th>
                             <th>Percentagem</th>
+                            <th>Ver</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -104,6 +106,7 @@
 
                             <td>{{$projeto->faturado or '-'}}</td>
                             <td>{{$projeto->percentagem or '-'}}</td>
+                            <td><a class="aVer" style="cursor: pointer;" title="Ver" href="{{route('visualizarProjetoUnico', ['id' => $projeto->pro_id])}}"><i class="fas fa-plus fa-sm"></i></a></td>
                         </tr>
 
                         @empty

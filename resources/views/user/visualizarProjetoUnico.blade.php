@@ -71,9 +71,15 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Visualização de Lotes</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Visualização de Projeto {{$nomeProjeto or ''}}</h6>
         </div>
         <div class="card-body">
+            <a href="{{ route('visualizarProjetos') }}" class="btn btn-primary btn-icon-split" style="float: right;" id="">
+                <span class="icon text-white-50">
+                    <i class="fas fa-chevron-circle-left"></i>
+                </span>
+                <span class="text">Voltar</span>
+            </a>
             <div class="table-responsive">
                 <div id="btnDatatable"></div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -85,7 +91,6 @@
                             <th>Orçamento</th>
                             <th>Faturado</th>
                             <th>Percentagem </th>
-                            <th>Ver</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -96,7 +101,6 @@
                             <th>Orçamento</th>
                             <th>Faturado</th>
                             <th>Percentagem</th>
-                            <th>Ver</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -108,11 +112,10 @@
                             <td>{{$projeto->orcamento or '-'}}</td>
                             <td>{{$projeto->faturado or '-'}}</td>
                             <td>{{$projeto->percentagem or '-'}}</td>
-                            <td><a class="aVer" style="cursor: pointer;" title="Ver" href="{{route('visualizarLoteUnico', ['id' => $projeto->lot_id])}}"><i class="fas fa-plus fa-sm"></i></a></td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="7" style="text-align: center;">Não há registros</td>
+                            <td colspan="6" style="text-align: center;">Não há registros</td>
                         </tr>
 
                         @endforelse
@@ -125,6 +128,6 @@
     <!-- /.container-fluid -->
 </div>
 
-<script src="{{asset('js/lotes/visualizarLotes.js')}}"></script>
+<script src="{{asset('js/projetos/visualizarProjetos.js')}}"></script>
 
 @endsection

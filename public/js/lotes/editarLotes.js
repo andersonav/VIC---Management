@@ -58,7 +58,7 @@ function deletarLote(idLote) {
 function getProjetos(idProjeto) {
     $.ajax({
         type: 'POST',
-        url: "/admin/getProjetos",
+        url: "/getProjetos",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },

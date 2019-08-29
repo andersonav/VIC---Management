@@ -75,7 +75,13 @@
             <h6 class="m-0 font-weight-bold text-primary">Edição da Atividade {{$nomeAtividade or ''}}</h6>
         </div>
         <div class="card-body">
-            <a href="javascript:void(0);" class="btn btn-primary btn-icon-split" style="float: right;" id="btnAddAtividade">
+            <a href="{{ route('editarAtividades') }}" class="btn btn-primary btn-icon-split" style="" id="">
+                <span class="icon text-white-50">
+                    <i class="fas fa-chevron-circle-left"></i>
+                </span>
+                <span class="text">Voltar</span>
+            </a>
+            <a href="javascript:void(0);" class="btn btn-primary btn-icon-split" style="float: right;" id="btnAddAtividade" onclick="openModalAddAtividade();">
                 <span class="icon text-white-50">
                     <i class="fas fa-plus"></i>
                 </span>

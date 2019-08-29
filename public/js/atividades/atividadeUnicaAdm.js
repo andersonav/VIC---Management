@@ -5,13 +5,14 @@ $(document).ready(function () {
 
     $("a[data-to=atividades3]").trigger('click');
 
-    $("#btnAddAtividade").click(function () {
-        var idAtividade = $("#idAtividadeProv").val();
-        getAtividades(idAtividade);
-        getUnidade("");
-        $("#addAtividadeUnica").modal('show');
-    });
 });
+
+function openModalAddAtividade() {
+    var idAtividade = $("#idAtividadeProv").val();
+    getAtividades(idAtividade);
+    getUnidade("");
+    $("#addAtividadeUnica").modal('show');
+}
 
 function editarAtividadeUnica(idAtividade, idUnidade, idAtividade1, codigo, descricao, precoUnidade, quantidade, faturado) {
     getAtividades(idAtividade1);
@@ -68,7 +69,7 @@ function deletarAtividadeUnica(idAtividade) {
 function getAtividades(idAtividade1) {
     $.ajax({
         type: 'POST',
-        url: "/admin/getAtividade1",
+        url: "/getAtividade1",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
@@ -87,7 +88,7 @@ function getAtividades(idAtividade1) {
 function getUnidade(idUnidade) {
     $.ajax({
         type: 'POST',
-        url: "/admin/getUnidade",
+        url: "/getUnidade",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },

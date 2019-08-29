@@ -71,9 +71,15 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Visualização de Lotes</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Visualização de Lote {{ $nomeLote or ''}}</h6>
         </div>
         <div class="card-body">
+            <a href="{{ route('visualizarLotes') }}" class="btn btn-primary btn-icon-split" style="float: right;" id="">
+                <span class="icon text-white-50">
+                    <i class="fas fa-chevron-circle-left"></i>
+                </span>
+                <span class="text">Voltar</span>
+            </a>
             <div class="table-responsive">
                 <div id="btnDatatable"></div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -81,22 +87,20 @@
                         <tr>
                             <th>ID Projeto</th>
                             <th>ID Lote</th>
-                            <th>Nome do Lote</th>
+                            <th>Nome da Atividade</th>
                             <th>Orçamento</th>
                             <th>Faturado</th>
                             <th>Percentagem </th>
-                            <th>Ver</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>ID Projeto</th>
                             <th>ID Lote</th>
-                            <th>Nome do Lote</th>
+                            <th>Nome da Atividade</th>
                             <th>Orçamento</th>
                             <th>Faturado</th>
                             <th>Percentagem</th>
-                            <th>Ver</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -104,17 +108,15 @@
                         <tr>
                             <td>{{$projeto->pro_id}}</td>
                             <td>{{$projeto->lot_id}}</td>
-                            <td>{{$projeto->lot_nome}}</td>
+                            <td>{{$projeto->at1_nome}}</td>
                             <td>{{$projeto->orcamento or '-'}}</td>
                             <td>{{$projeto->faturado or '-'}}</td>
                             <td>{{$projeto->percentagem or '-'}}</td>
-                            <td><a class="aVer" style="cursor: pointer;" title="Ver" href="{{route('visualizarLoteUnico', ['id' => $projeto->lot_id])}}"><i class="fas fa-plus fa-sm"></i></a></td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="7" style="text-align: center;">Não há registros</td>
+                            <td colspan="5" style="text-align: center;">Não há registros</td>
                         </tr>
-
                         @endforelse
 
                     </tbody>

@@ -72,9 +72,9 @@ class AdminController extends Controller
         INNER JOIN atividade1 ON atividade2.ati1_id = atividade1.ati1_id
         INNER JOIN lote ON atividade1.lot_id = lote.lot_id
         WHERE pro.pro_id = lote.pro_id) as valorFaturado,
-        (SELECT (valorOrcamento - valorFaturado) as sub ) as symbolPercentagem,
-        (SELECT CONCAT(valorOrcamento, " €")) as orcamento,
-        (SELECT CONCAT(valorFaturado, " €")) as faturado,
+        (SELECT ((valorFaturado * 100) / valorOrcamento )) as symbolPercentagem,
+        (SELECT CONCAT(FORMAT(valorOrcamento, 2), " €")) as orcamento,
+        (SELECT CONCAT(FORMAT(valorFaturado, 2), " €")) as faturado,
         (SELECT CONCAT(symbolPercentagem, " %")) as percentagem
         from projeto pro');
 
@@ -95,15 +95,7 @@ class AdminController extends Controller
     }
 
 
-    public function deletarProjeto(Request $request)
-    {
-        $response = array(
-            "data" => 'success'
-        );
-        $update = Projeto::where('pro_id', $request->id)->delete();
-
-        return response()->json($response);
-    }
+    
 
     public function validateProjeto(Request $request)
     {
@@ -135,9 +127,9 @@ class AdminController extends Controller
         (SELECT SUM(ati2_faturado) from atividade2
         INNER JOIN atividade1 ON atividade2.ati1_id = atividade1.ati1_id
         WHERE atividade1.lot_id = lote.lot_id) as valorFaturado,
-        (SELECT (valorOrcamento - valorFaturado) as sub ) as symbolPercentagem,
-        (SELECT CONCAT(valorOrcamento, " €")) as orcamento,
-        (SELECT CONCAT(valorFaturado, " €")) as faturado,
+        (SELECT ((valorFaturado * 100) / valorOrcamento )) as symbolPercentagem,
+        (SELECT CONCAT(FORMAT(valorOrcamento, 2), " €")) as orcamento,
+        (SELECT CONCAT(FORMAT(valorFaturado, 2), " €")) as faturado,
         (SELECT CONCAT(symbolPercentagem, " %")) as percentagem
         from lote
         INNER JOIN projeto ON projeto.pro_id = lote.pro_id');
@@ -160,15 +152,7 @@ class AdminController extends Controller
     }
 
 
-    public function deletarLote(Request $request)
-    {
-        $response = array(
-            "data" => 'success'
-        );
-        $update = Lote::where('lot_id', $request->id)->delete();
-
-        return response()->json($response);
-    }
+   
 
     public function validateLote(Request $request)
     {
@@ -199,9 +183,9 @@ class AdminController extends Controller
         WHERE atividade1.ati1_id = atividade2.ati1_id) as valorOrcamento,
         (SELECT SUM(ati2_faturado) from atividade2
         WHERE atividade1.ati1_id = atividade2.ati1_id) as valorFaturado,
-        (SELECT (valorOrcamento - valorFaturado) as sub ) as symbolPercentagem,
-        (SELECT CONCAT(valorOrcamento, " €")) as orcamento,
-        (SELECT CONCAT(valorFaturado, " €")) as faturado,
+        (SELECT ((valorFaturado * 100) / valorOrcamento )) as symbolPercentagem,
+        (SELECT CONCAT(FORMAT(valorOrcamento, 2), " €")) as orcamento,
+        (SELECT CONCAT(FORMAT(valorFaturado, 2), " €")) as faturado,
         (SELECT CONCAT(symbolPercentagem, " %")) as percentagem
         from atividade1
         INNER JOIN lote ON lote.lot_id = atividade1.lot_id
@@ -225,15 +209,7 @@ class AdminController extends Controller
         return response()->json($response);
     }
 
-    public function deletarAtividade(Request $request)
-    {
-        $response = array(
-            "data" => 'success'
-        );
-        $update = Atividade1::where('ati1_id', $request->id)->delete();
-
-        return response()->json($response);
-    }
+   
 
 
     public function editarAtividade2(Request $request)
@@ -314,16 +290,16 @@ class AdminController extends Controller
         WHERE menu_tipo_usuario.tip_usu_id = ?', [Auth::user()->tip_usu_id, Auth::user()->tip_usu_id, Auth::user()->tip_usu_id, Auth::user()->tip_usu_id]);
 
 
-
+        $singleAtividade = Atividade1::where('ati1_id', $id)->get();
 
         $atividade = DB::select('SELECT projeto.pro_id, lote.lot_id, atividade1.ati1_id, atividade1.at1_nome,
         atividade2.ati2_id, atividade2.ati2_codigo, atividade2.ati2_descricao, atividade2.ati2_preco_unidade,
         atividade2.ati2_quantidade,  atividade2.uni_id,
         (ati2_quantidade * ati2_preco_unidade)  as valorOrcamento,
         atividade2.ati2_faturado as valorFaturado,
-        (SELECT (valorOrcamento - valorFaturado) as sub ) as symbolPercentagem,
-        (SELECT CONCAT(valorOrcamento, " €")) as orcamento,
-        (SELECT CONCAT(valorFaturado, " €")) as faturado,
+        (SELECT ((valorFaturado * 100) / valorOrcamento )) as symbolPercentagem,
+        (SELECT CONCAT(FORMAT(valorOrcamento, 2), " €")) as orcamento,
+        (SELECT CONCAT(FORMAT(valorFaturado, 2), " €")) as faturado,
         (SELECT CONCAT(symbolPercentagem, " %")) as percentagem
         from atividade2
         INNER JOIN atividade1 ON atividade1.ati1_id = atividade2.ati1_id
@@ -331,9 +307,9 @@ class AdminController extends Controller
         INNER JOIN projeto ON projeto.pro_id = lote.pro_id
         WHERE atividade1.ati1_id = ?', [$id]);
 
-        if (isset($atividade[0]->at1_nome) && isset($atividade[0]->ati1_id)) {
-            $nomeAtividade = $atividade[0]->at1_nome;
-            $idAtividade = $atividade[0]->ati1_id;
+        if (isset($singleAtividade[0]->at1_nome) && isset($singleAtividade[0]->ati1_id)) {
+            $nomeAtividade = $singleAtividade[0]->at1_nome;
+            $idAtividade = $singleAtividade[0]->ati1_id;
         }
         return view('admin.atividade', compact('itensMenu', 'atividade', 'nomeAtividade', 'idAtividade'));
     }

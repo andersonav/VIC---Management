@@ -57,7 +57,7 @@ function deletarAtividade(idAtividade) {
 function getLotes(idLote) {
     $.ajax({
         type: 'POST',
-        url: "/admin/getLotes",
+        url: "/getLotes",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
