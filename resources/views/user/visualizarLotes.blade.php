@@ -108,8 +108,8 @@
                             <td>{{$projeto->percentagem or '-'}}</td>
                         </tr>
                         @empty
-                        <tr colspan="6">
-                            <td>Não há registros</td>
+                        <tr>
+                            <td colspan="6" style="text-align: center;">Não há registros</td>
                         </tr>
 
                         @endforelse

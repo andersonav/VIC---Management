@@ -109,8 +109,8 @@
                         </tr>
 
                         @empty
-                        <tr colspan="5">
-                            <td>Não há registros</td>
+                        <tr>
+                            <td colspan="5" style="text-align: center;">Não há registros</td>
                         </tr>
 
                         @endforelse

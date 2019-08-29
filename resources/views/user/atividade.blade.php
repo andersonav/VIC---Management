@@ -71,9 +71,10 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Edição de Lotes</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Visualização da Atividade {{$nomeAtividade or ''}}</h6>
         </div>
         <div class="card-body">
+
             <div class="table-responsive">
                 <div id="btnDatatable"></div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -81,39 +82,50 @@
                         <tr>
                             <th>ID Projeto</th>
                             <th>ID Lote</th>
-                            <th>Nome do Lote</th>
+                            <th>Nome da Atividade</th>
+                            <th>Código</th>
+                            <th>Descrição</th>
+                            <th>Preço Unidade</th>
+                            <th>Quantidade</th>
                             <th>Orçamento</th>
                             <th>Faturado</th>
                             <th>Percentagem </th>
-                            <th>Ações</th>
+                            <!-- <th>Ações</th> -->
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>ID Projeto</th>
                             <th>ID Lote</th>
-                            <th>Nome do Lote</th>
+                            <th>Nome da Atividade</th>
+                            <th>Código</th>
+                            <th>Descrição</th>
+                            <th>Preço Unidade</th>
+                            <th>Quantidade</th>
                             <th>Orçamento</th>
                             <th>Faturado</th>
                             <th>Percentagem </th>
-                            <th>Ações</th>
+                            <!-- <th>Ações</th> -->
                         </tr>
                     </tfoot>
                     <tbody>
-                        @forelse($getProjetos as $projeto)
+                        @forelse($atividade as $atividadeUnica)
                         <tr>
-                            <td>{{$projeto->pro_id}}</td>
-                            <td>{{$projeto->lot_id}}</td>
-                            <td>{{$projeto->lot_nome}}</td>
-                            <td>{{$projeto->orcamento or '-'}}</td>
-                            <td>{{$projeto->faturado or '-'}}</td>
-                            <td>{{$projeto->percentagem or '-'}}</td>
-                            <td><a class="aEdit" style="cursor: pointer;" title="Editar" onclick="editarLote({{$projeto->pro_id}}, {{$projeto->lot_id}}, '{{$projeto->lot_nome}}')"><i class="fas fa-edit fa-sm"></i></a>&nbsp;&nbsp;&nbsp;<a class="aEdit" style="cursor: pointer;" title="Deletar" onclick="deletarLote({{$projeto->lot_id}})"><i class="fas fa-trash fa-sm"></i></a></td>
+                            <td>{{$atividadeUnica->pro_id}}</td>
+                            <td>{{$atividadeUnica->lot_id}}</td>
+                            <td>{{$atividadeUnica->at1_nome}}</td>
+                            <td>{{$atividadeUnica->ati2_codigo}}</td>
+                            <td>{{$atividadeUnica->ati2_descricao}}</td>
+                            <td>{{$atividadeUnica->ati2_preco_unidade}}</td>
+                            <td>{{$atividadeUnica->ati2_quantidade}}</td>
+                            <td>{{$atividadeUnica->orcamento or '-'}}</td>
+                            <td>{{$atividadeUnica->faturado or '-'}}</td>
+                            <td>{{$atividadeUnica->percentagem or '-'}}</td>
+                            <!-- <td></td> -->
                         </tr>
-
                         @empty
                         <tr>
-                            <td colspan="6" style="text-align: center;">Não há registros</td>
+                            <td colspan="10" style="text-align: center;">Não há registros</td>
                         </tr>
 
                         @endforelse
@@ -126,42 +138,6 @@
     <!-- /.container-fluid -->
 </div>
 
-<div class="modal fade" id="editarLote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <form id="logout-form" action="{{ route('editarLote') }}" method="POST" style="">
-            {{ csrf_field() }}
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar Lote</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="errors">
-
-                    </div>
-                    <input type="hidden" class="form-control" value="" id="idLote" name="idLote">
-                    <div class="form-group">
-                        <input type="text" class="form-control" value="" id="nomeLote" placeholder="Nome Lote" name="nomeLote">
-                    </div>
-                    <div class="form-group">
-                        <label for="idProjeto">Projeto</label>
-                        <select class="form-control" id="idProjeto" name="idProjeto">
-                            <option value="">Selecione uma opção</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" type="submit">Editar</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-<script src="{{asset('js/operacao.js')}}"></script>
-<script src="{{asset('js/lotes/editarLotes.js')}}"></script>
+<script src="{{asset('js/atividades/visualizarAtividades.js')}}"></script>
 
 @endsection

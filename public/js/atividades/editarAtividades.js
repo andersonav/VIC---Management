@@ -3,23 +3,22 @@ $(document).ready(function () {
         $(this).removeClass('active');
     });
 
-    $("a[data-to=lotes2]").trigger('click');
+    $("a[data-to=atividades3]").trigger('click');
 });
 
-
-function editarLote(idProjeto, idLote, nomeLote) {
-    getProjetos(idProjeto);
-    $("#nomeLote").val(nomeLote);
-    $("#idLote").val(idLote);
-
-    $("#editarLote").modal('show');
+function editarAtividade(idAtividade, idLote, codigo, nomeAtividade) {
+    getLotes(idLote);
+    $("#nomeAtividade").val(nomeAtividade);
+    $("#codigo").val(codigo);
+    $("#idAtividade").val(idAtividade);
+    $("#editarAtividade").modal('show');
 }
 
 
-function deletarLote(idLote) {
+function deletarAtividade(idAtividade) {
     var url_atual = window.location.href;
     swal({
-        title: 'Você tem certeza que deseja excluir esse lote?',
+        title: 'Você tem certeza que deseja excluir essa atividade?',
         text: "Essa ação não poderá ser desfeita!",
         type: 'warning',
         showCancelButton: true,
@@ -30,16 +29,16 @@ function deletarLote(idLote) {
         if (result.value) {
             $.ajax({
                 type: 'POST',
-                url: url_atual + "/deletarLote",
+                url: url_atual + "/deletarAtividade",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 data: {
-                    id: idLote
+                    id: idAtividade
                 }, success: function (data, textStatus, jqXHR) {
                     swal(
                         'Deletado!',
-                        'O lote foi deletado!.',
+                        'A atividade foi deletada!.',
                         'success'
                     )
                     var refreshIntervalId = setInterval(function () {
@@ -55,21 +54,21 @@ function deletarLote(idLote) {
 }
 
 
-function getProjetos(idProjeto) {
+function getLotes(idLote) {
     $.ajax({
         type: 'POST',
-        url: "/admin/getProjetos",
+        url: "/admin/getLotes",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         data: {
         }, success: function (data, textStatus, jqXHR) {
-            $("select#idProjeto").html("");
-            $("select#idProjeto").append('<option value="">Selecione uma opção</option>');
+            $("select#idLote").html("");
+            $("select#idLote").append('<option value="">Selecione uma opção</option>');
             for (var i = 0; i < data.length; i++) {
-                $("select#idProjeto").append('<option value="' + data[i].pro_id + '">' + data[i].pro_nome + '</option>');
+                $("select#idLote").append('<option value="' + data[i].lot_id + '">' + data[i].lot_nome + '</option>');
             }
-            $("#idProjeto").val(idProjeto);
+            $("#idLote").val(idLote);
         }
     });
 }
