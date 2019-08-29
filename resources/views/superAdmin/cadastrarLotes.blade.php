@@ -71,17 +71,24 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Cadastro de Projetos</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Cadastro de Lotes</h6>
         </div>
         <div class="card-body">
             <div class="col-lg-4">
                 <div class="errors">
 
                 </div>
-                <form class="user" method="POST" action="{{ route('cadastrarProjeto') }}">
+                <form class="user" method="POST" action="{{ route('cadastrarLote') }}">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <input type="text" class="form-control" value="" id="nomeProjeto" aria-describedby="nomeProjeto" placeholder="Nome Projeto" name="nomeProjeto">
+                        <input type="text" class="form-control" value="" id="nomeLote" placeholder="Nome Lote" name="nomeLote">
+                    </div>
+                    <div class="form-group">
+                        <label for="idProjeto">Projeto</label>
+                        <select class="form-control" id="idProjeto" name="idProjeto">
+                            <option value="">Selecione uma opção</option>
+                           
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">
                         Cadastrar
@@ -98,6 +105,6 @@
 </div>
 
 <script src="{{asset('js/operacao.js')}}"></script>
-<script src="{{asset('js/projetos/cadastrarProjetos.js')}}"></script>
+<script src="{{asset('js/lotes/cadastrarLotes.js')}}"></script>
 
 @endsection
