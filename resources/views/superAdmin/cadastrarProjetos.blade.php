@@ -81,6 +81,7 @@
                 <form class="user" method="POST" action="{{ route('cadastrarProjeto') }}">
                     {{ csrf_field() }}
                     <div class="form-group">
+                    <label for="">Nome do projeto</label>
                         <input type="text" class="form-control" value="" id="nomeProjeto" aria-describedby="nomeProjeto" placeholder="Nome Projeto" name="nomeProjeto">
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">

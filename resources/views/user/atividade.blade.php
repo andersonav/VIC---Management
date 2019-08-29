@@ -74,7 +74,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Visualização da Atividade {{$nomeAtividade or ''}}</h6>
         </div>
         <div class="card-body">
-            <a href="{{ route('visualizarAtividades') }}" class="btn btn-primary btn-icon-split" style="float: right;" id="">
+            <a href="{{ route($rota) }}" class="btn btn-primary btn-icon-split" style="float: right;" id="">
                 <span class="icon text-white-50">
                     <i class="fas fa-chevron-circle-left"></i>
                 </span>

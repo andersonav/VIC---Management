@@ -109,7 +109,7 @@
                             <td>{{$projeto->faturado or '-'}}</td>
                             <td>{{$projeto->percentagem or '-'}}</td>
                             <td>
-                                <a class="aVer" style="cursor: pointer;" title="Ver" href="{{route('visualizarLoteUnico', ['id' => $projeto->lot_id])}}"><i class="fas fa-eye fa-sm"></i></a>
+                                <a class="aVer" style="cursor: pointer;" title="Ver" href="{{route('visualizarLoteUnicoAdm', ['id' => $projeto->lot_id])}}"><i class="fas fa-eye fa-sm"></i></a>
                                 &nbsp;&nbsp;
                                 <a class="aEdit" style="cursor: pointer;" title="Editar" onclick="editarLote({{$projeto->pro_id}}, {{$projeto->lot_id}}, '{{$projeto->lot_nome}}')"><i class="fas fa-edit fa-sm"></i></a>&nbsp;&nbsp;
                                 @if(auth()->user()->tip_usu_id == 1)

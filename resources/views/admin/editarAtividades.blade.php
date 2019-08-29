@@ -85,7 +85,7 @@
                             <th>Orçamento</th>
                             <th>Faturado</th>
                             <th>Percentagem </th>
-                            <th>Ver</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tfoot>

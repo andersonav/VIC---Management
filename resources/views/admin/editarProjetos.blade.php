@@ -94,6 +94,7 @@
                             <th>Orçamento</th>
                             <th>Faturado</th>
                             <th>Percentagem</th>
+                            <th>Ações</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -106,7 +107,7 @@
                             <td>{{$projeto->faturado or '-'}}</td>
                             <td>{{$projeto->percentagem or '-'}}</td>
                             <td>
-                                <a class="aVer" style="cursor: pointer;" title="Ver" href="{{route('visualizarProjetoUnico', ['id' => $projeto->pro_id])}}"><i class="fas fa-eye fa-sm"></i></a>
+                                <a class="aVer" style="cursor: pointer;" title="Ver" href="{{route('visualizarProjetoUnicoAdm', ['id' => $projeto->pro_id])}}"><i class="fas fa-eye fa-sm"></i></a>
                                 &nbsp;&nbsp;
                                 <a class="aEdit" style="cursor: pointer;" title="Editar" onclick="editarProjeto({{$projeto->pro_id}}, '{{$projeto->pro_nome}}')"><i class="fas fa-edit fa-sm"></i></a>&nbsp;&nbsp;
                                 @if(auth()->user()->tip_usu_id == 1)

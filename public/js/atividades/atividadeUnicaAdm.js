@@ -41,7 +41,7 @@ function deletarAtividadeUnica(idAtividade) {
         if (result.value) {
             $.ajax({
                 type: 'POST',
-                url: url_atual + "/deletarAtividade",
+                url: url_atual + "/deletarAtividade2",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },

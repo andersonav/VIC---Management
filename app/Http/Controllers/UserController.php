@@ -82,7 +82,8 @@ class UserController extends Controller
         if (isset($singleProjeto[0]->pro_nome)) {
             $nomeProjeto = '- ' . $singleProjeto[0]->pro_nome;
         }
-        return view('user.visualizarProjetoUnico', compact('itensMenu', 'getProjetos', 'nomeProjeto'));
+        $rota = "visualizarProjetos";
+        return view('user.visualizarProjetoUnico', compact('itensMenu', 'getProjetos', 'nomeProjeto', 'rota'));
     }
 
     public function visualizarLotes()
@@ -150,7 +151,8 @@ class UserController extends Controller
         if (isset($singleLote[0]->lot_nome)) {
             $nomeLote = '- ' . $singleLote[0]->lot_nome;
         }
-        return view('user.visualizarLoteUnico', compact('itensMenu', 'getProjetos', 'nomeLote'));
+        $rota = 'visualizarLotes';
+        return view('user.visualizarLoteUnico', compact('itensMenu', 'getProjetos', 'nomeLote', 'rota'));
     }
 
     public function visualizarAtividades()
@@ -222,6 +224,7 @@ class UserController extends Controller
         if (isset($singleAtividade[0]->at1_nome)) {
             $nomeAtividade = $singleAtividade[0]->at1_nome;
         }
-        return view('user.atividade', compact('itensMenu', 'atividade', 'nomeAtividade'));
+        $rota = 'visualizarAtividades';
+        return view('user.atividade', compact('itensMenu', 'atividade', 'nomeAtividade', 'rota'));
     }
 }

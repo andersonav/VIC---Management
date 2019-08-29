@@ -8,6 +8,7 @@ use DB;
 use App\Projeto;
 use App\Lote;
 use App\Atividade1;
+use App\Atividade2;
 use Illuminate\Support\Facades\Redirect;
 
 class SuperAdminController extends Controller
@@ -151,6 +152,16 @@ class SuperAdminController extends Controller
         return response()->json($response);
     }
 
+
+    public function deletarAtividade2(Request $request)
+    {
+        $response = array(
+            "data" => 'success'
+        );
+        $update = Atividade2::where('ati2_id', $request->id)->delete();
+
+        return response()->json($response);
+    }
 
     public function validateCadastro(Request $request)
     {

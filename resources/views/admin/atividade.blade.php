@@ -133,7 +133,12 @@
                             <td>{{$atividadeUnica->orcamento or '-'}}</td>
                             <td>{{$atividadeUnica->faturado or '-'}}</td>
                             <td>{{$atividadeUnica->percentagem or '-'}}</td>
-                            <td><a class="aEdit" style="cursor: pointer;" title="Editar" onclick="editarAtividadeUnica({{$atividadeUnica->ati2_id}}, {{$atividadeUnica->uni_id}}, {{$atividadeUnica->ati1_id}}, '{{$atividadeUnica->ati2_codigo}}', '{{$atividadeUnica->ati2_descricao}}', '{{$atividadeUnica->ati2_preco_unidade}}', '{{$atividadeUnica->ati2_quantidade}}', '{{$atividadeUnica->valorFaturado}}')"><i class="fas fa-edit fa-sm"></i></a>&nbsp;&nbsp;&nbsp;<a class="aEdit" style="cursor: pointer;" title="Deletar" onclick="deletarAtividade({{$atividadeUnica->ati2_id}})"><i class="fas fa-trash fa-sm"></i></a></td>
+                            <td>
+                                <a class="aEdit" style="cursor: pointer;" title="Editar" onclick="editarAtividadeUnica({{$atividadeUnica->ati2_id}}, {{$atividadeUnica->uni_id}}, {{$atividadeUnica->ati1_id}}, '{{$atividadeUnica->ati2_codigo}}', '{{$atividadeUnica->ati2_descricao}}', '{{$atividadeUnica->ati2_preco_unidade}}', '{{$atividadeUnica->ati2_quantidade}}', '{{$atividadeUnica->valorFaturado}}')"><i class="fas fa-edit fa-sm"></i></a>&nbsp;&nbsp;&nbsp;
+                                @if(auth()->user()->tip_usu_id == 1)
+                                <a class="aDelete" style="cursor: pointer;" title="Deletar" onclick="deletarAtividadeUnica({{$atividadeUnica->ati2_id}})"><i class="fas fa-trash fa-sm"></i></a>
+                                @endif
+                            </td>
                         </tr>
                         @empty
                         <tr>
