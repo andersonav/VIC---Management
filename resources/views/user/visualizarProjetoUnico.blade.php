@@ -74,12 +74,20 @@
             <h6 class="m-0 font-weight-bold text-primary">Visualização de Projeto {{$nomeProjeto or ''}}</h6>
         </div>
         <div class="card-body">
-            <a href="{{ route($rota) }}" class="btn btn-primary btn-icon-split" style="float: right;" id="">
+            <a href="JavaScript: window.history.back();" class="btn btn-primary btn-icon-split" style="float: right;" id="btnVoltar">
                 <span class="icon text-white-50">
                     <i class="fas fa-chevron-circle-left"></i>
                 </span>
                 <span class="text">Voltar</span>
             </a>
+            @if(auth()->user()->tip_usu_id == 1)
+            <a href="javascript:void(0);" class="btn btn-success btn-icon-split" style="float: right; margin-right: 20px;" id="btnAddLote" onclick="openModalAddLote({{$idProjeto}});">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">Novo Lote</span>
+            </a>
+            @endif
             <div class="table-responsive">
                 <div id="btnDatatable"></div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -91,6 +99,7 @@
                             <th>Orçamento</th>
                             <th>Faturado</th>
                             <th>Percentagem </th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -101,6 +110,7 @@
                             <th>Orçamento</th>
                             <th>Faturado</th>
                             <th>Percentagem</th>
+                            <th>Ações</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -112,6 +122,16 @@
                             <td>{{$projeto->orcamento or '-'}}</td>
                             <td>{{$projeto->faturado or '-'}}</td>
                             <td>{{$projeto->percentagem or '-'}}</td>
+                            <td>
+                                <a class="aVer" style="cursor: pointer;" title="Ver" href="{{route('visualizarProjetoLoteUnico', ['idProjeto' => $projeto->pro_id, 'idLote' => $projeto->lot_id])}}"><i class="fas fa-eye fa-sm"></i></a>&nbsp;&nbsp;
+                                @if(auth()->user()->tip_usu_id != 3)
+                                <a class="aEdit" style="cursor: pointer;" title="Editar" onclick="editarLote({{$projeto->pro_id}}, {{$projeto->lot_id}}, '{{$projeto->lot_nome}}')"><i class="fas fa-edit fa-sm"></i></a>&nbsp;&nbsp;
+                                @endif
+                                @if(auth()->user()->tip_usu_id == 1)
+                                <a class="aDel" style="cursor: pointer;" title="Deletar" onclick="deletarLote({{$projeto->lot_id}})"><i class="fas fa-trash fa-sm"></i></a>
+                                @endif
+
+                            </td>
                         </tr>
                         @empty
                         <tr>
@@ -127,7 +147,80 @@
     </div>
     <!-- /.container-fluid -->
 </div>
+@if(auth()->user()->tip_usu_id != 3)
+<div class="modal fade" id="editarLote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form id="logout-form" action="{{ route('editarLote') }}" method="POST" style="">
+            {{ csrf_field() }}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Lote</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="errors">
 
-<script src="{{asset('js/projetos/visualizarProjetos.js')}}"></script>
+                    </div>
+                    <input type="hidden" class="form-control" value="" id="idLote" name="idLote">
+                    <div class="form-group">
+                        <input type="text" class="form-control" value="" id="nomeLote" placeholder="Nome Lote" name="nomeLote">
+                    </div>
+                    <div class="form-group">
+                        <label for="idProjeto">Projeto</label>
+                        <select class="form-control" id="idProjeto" name="idProjeto">
+                            <option value="">Selecione uma opção</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="submit">Editar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addLote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="user" method="POST" action="{{ route('cadastrarLote') }}">
+            {{ csrf_field() }}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Adicionar Lote</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="errors">
+
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" value="" id="nomeLote" placeholder="Nome Lote" name="nomeLote">
+                    </div>
+                    <div class="form-group">
+                        <label for="idProjeto">Projeto</label>
+                        <select class="form-control" id="idProjeto" name="idProjeto">
+                            <option value="">Selecione uma opção</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="submit">Cadastrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="{{asset('js/operacao.js')}}"></script>
+<script src="{{asset('js/lotes/editarLotes.js')}}"></script>
+
+@endif
 
 @endsection

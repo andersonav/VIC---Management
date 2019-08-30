@@ -71,17 +71,23 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Visualização de Atividades</h6>
+            <input type="hidden" class="form-control" value="{{$idAtividade or ''}}" id="idAtividadeProv" name="idAtividadeProv">
+            <h6 class="m-0 font-weight-bold text-primary">Visualização da Atividade {{$nomeAtividade or ''}} <br />Lote {{$nomeLote or ''}} <br /> Projeto {{$nomeProjeto or ''}}</h6>
         </div>
         <div class="card-body">
-            @if(auth()->user()->tip_usu_id == 1)
-            <a href="javascript:void(0);" class="btn btn-success btn-icon-split" style="float: right;" id="btnAddAtividade" onclick="openModalAddAtividade();">
+            <a href="JavaScript: window.history.back();" class="btn btn-primary btn-icon-split" style="float: right;" id="">
+                <span class="icon text-white-50">
+                    <i class="fas fa-chevron-circle-left"></i>
+                </span>
+                <span class="text">Voltar</span>
+            </a>
+
+            <a href="javascript:void(0);" class="btn btn-success btn-icon-split" style="float: right; margin-right: 20px;" id="btnAddAtividade" onclick="openModalAddAtividade();">
                 <span class="icon text-white-50">
                     <i class="fas fa-plus"></i>
                 </span>
-                <span class="text">Nova Atividade</span>
+                <span class="text">Nova Atividade 2</span>
             </a>
-            @endif
             <div class="table-responsive">
                 <div id="btnDatatable"></div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -91,50 +97,61 @@
                             <th>ID Lote</th>
                             <th>Código</th>
                             <th>Nome da Atividade</th>
+                            <th>Descrição</th>
+                            <th>Preço Unidade</th>
+                            <th>Quantidade</th>
                             <th>Orçamento</th>
                             <th>Faturado</th>
                             <th>Percentagem </th>
-                            <th>Ver</th>
+                            @if(auth()->user()->tip_usu_id != 3)
+                            <th>Ações</th>
+                            @endif
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>ID Projeto</th>
                             <th>ID Lote</th>
-                            <th>Código</th>
                             <th>Nome da Atividade</th>
+                            <th>Código</th>
+                            <th>Descrição</th>
+                            <th>Preço Unidade</th>
+                            <th>Quantidade</th>
                             <th>Orçamento</th>
                             <th>Faturado</th>
-                            <th>Percentagem</th>
-                            <th>Ver</th>
+                            <th>Percentagem </th>
+                            @if(auth()->user()->tip_usu_id != 3)
+                            <th>Ações</th>
+                            @endif
                         </tr>
                     </tfoot>
                     <tbody>
-                        @forelse($getProjetos as $projeto)
+                        @forelse($atividade as $atividadeUnica)
                         <tr>
-                            <td>{{$projeto->pro_id}}</td>
-                            <td>{{$projeto->lot_id}}</td>
-                            <td>{{$projeto->ati1_codigo}}</td>
-                            <td>{{$projeto->at1_nome}}</td>
-                            <td>{{$projeto->orcamento or '-'}}</td>
-                            <td>{{$projeto->faturado or '-'}}</td>
-                            <td>{{$projeto->percentagem or '-'}}</td>
+                            <td>{{$atividadeUnica->pro_id}}</td>
+                            <td>{{$atividadeUnica->lot_id}}</td>
+                            <td>{{$atividadeUnica->at1_nome}}</td>
+                            <td>{{$atividadeUnica->ati2_codigo}}</td>
+                            <td>{{$atividadeUnica->ati2_descricao}}</td>
+                            <td>{{$atividadeUnica->ati2_preco_unidade}}</td>
+                            <td>{{$atividadeUnica->ati2_quantidade}}</td>
+                            <td>{{$atividadeUnica->orcamento or '-'}}</td>
+                            <td>{{$atividadeUnica->faturado or '-'}}</td>
+                            <td>{{$atividadeUnica->percentagem or '-'}}</td>
+                            @if(auth()->user()->tip_usu_id != 3)
                             <td>
-                                <a class="aVer" style="cursor: pointer;" title="Ver" href="{{route('visualizarAtividadeUnica', ['idProjeto' => $projeto->pro_id, 'idLote' => $projeto->lot_id, 'idAtividade' => $projeto->ati1_id ])}}"><i class="fas fa-eye fa-sm"></i></a>
-                                &nbsp;&nbsp;
-                                @if(auth()->user()->tip_usu_id != 3)
-                                <a class="aEdit" style="cursor: pointer;" title="Editar" onclick="editarAtividade({{$projeto->ati1_id}}, {{$projeto->lot_id}}, '{{$projeto->ati1_codigo}}' ,'{{$projeto->at1_nome}}')"><i class="fas fa-edit fa-sm"></i></a>&nbsp;&nbsp;
-                                @endif
+                                <a class="aEdit" style="cursor: pointer;" title="Editar" onclick="editarAtividadeUnica({{$atividadeUnica->ati2_id}}, {{$atividadeUnica->uni_id}}, {{$atividadeUnica->ati1_id}}, '{{$atividadeUnica->ati2_codigo}}', '{{$atividadeUnica->ati2_descricao}}', '{{$atividadeUnica->ati2_preco_unidade}}', '{{$atividadeUnica->ati2_quantidade}}', '{{$atividadeUnica->valorFaturado}}')"><i class="fas fa-edit fa-sm"></i></a>&nbsp;&nbsp;&nbsp;
                                 @if(auth()->user()->tip_usu_id == 1)
-                                <a class="aDel" style="cursor: pointer;" title="Deletar" onclick="deletarAtividade({{$projeto->ati1_id}})"><i class="fas fa-trash fa-sm"></i></a>
+                                <a class="aDelete" style="cursor: pointer;" title="Deletar" onclick="deletarAtividadeUnica({{$atividadeUnica->ati2_id}})"><i class="fas fa-trash fa-sm"></i></a>
                                 @endif
-
                             </td>
+                            @endif
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="6" style="text-align: center;">Não há registros</td>
+                            <td colspan="10" style="text-align: center;">Não há registros</td>
                         </tr>
+
                         @endforelse
 
                     </tbody>
@@ -146,13 +163,13 @@
 </div>
 
 @if(auth()->user()->tip_usu_id != 3)
-<div class="modal fade" id="editarAtividade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editarAtividadeUnica" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form id="logout-form" action="{{ route('editarAtividade') }}" method="POST" style="">
+        <form id="logout-form" action="{{ route('editarAtividade2') }}" method="POST" style="">
             {{ csrf_field() }}
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar Atividade</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Atividade 2</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -163,18 +180,36 @@
                     </div>
                     <input type="hidden" class="form-control" value="" id="idAtividade" name="idAtividade">
                     <div class="form-group">
-                        <label for="">Nome Atividade</label>
-                        <input type="text" class="form-control" value="" id="nomeAtividade" placeholder="Nome Atividade" name="nomeAtividade">
-                    </div>
-                    <div class="form-group">
                         <label for="">Código</label>
                         <input type="text" class="form-control" value="" id="codigo" placeholder="Código" name="codigo">
                     </div>
                     <div class="form-group">
-                        <label for="idLote">Lote</label>
-                        <select class="form-control" id="idLote" name="idLote">
+                        <label for="">Preço Unidade</label>
+                        <input type="text" class="form-control" value="" id="precoUnidade" placeholder="Preço Unidade" name="precoUnidade">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Quantidade</label>
+                        <input type="text" class="form-control" value="" id="quantidade" placeholder="Quantidade" name="quantidade">
+                    </div>
+                    <div class="form-group">
+                        <label for="idAtividade1">Atividade 1</label>
+                        <select class="form-control" id="idAtividade1" name="idAtividade1">
                             <option value="">Selecione uma opção</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="idUnidade">Unidade</label>
+                        <select class="form-control" id="idUnidade" name="idUnidade">
+                            <option value="">Selecione uma opção</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Faturado</label>
+                        <input type="text" class="form-control" value="" id="faturado" placeholder="Faturado" name="faturado">
+                    </div>
+                    <div class="form-group">
+                        <label for="descricaoAtividade">Descrição</label>
+                        <textarea class="form-control" id="descricaoAtividade" name="descricaoAtividade" rows="5"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -186,9 +221,9 @@
     </div>
 </div>
 
-<div class="modal fade" id="addAtividade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addAtividadeUnica" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form class="user" method="POST" action="{{ route('cadastrarAtividade') }}">
+        <form id="logout-form" action="{{ route('addAtividade2') }}" method="POST" style="">
             {{ csrf_field() }}
             <div class="modal-content">
                 <div class="modal-header">
@@ -201,35 +236,53 @@
                     <div class="errors">
 
                     </div>
-                    <div class="form-group">
-                        <label for="">Nome Atividade</label>
-                        <input type="text" class="form-control" value="" id="nomeAtividade" placeholder="Nome Atividade" name="nomeAtividade">
-                    </div>
+                    <input type="hidden" class="form-control" value="" id="idAtividade" name="idAtividade">
                     <div class="form-group">
                         <label for="">Código</label>
                         <input type="text" class="form-control" value="" id="codigo" placeholder="Código" name="codigo">
                     </div>
                     <div class="form-group">
-                        <label for="idLote">Lote</label>
-                        <select class="form-control" id="idLote" name="idLote">
+                        <label for="">Preço Unidade</label>
+                        <input type="text" class="form-control" value="" id="precoUnidade" placeholder="Preço Unidade" name="precoUnidade">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Quantidade</label>
+                        <input type="text" class="form-control" value="" id="quantidade" placeholder="Quantidade" name="quantidade">
+                    </div>
+                    <div class="form-group">
+                        <label for="idAtividade1">Atividade 1</label>
+                        <select class="form-control" id="idAtividade1" name="idAtividade1">
                             <option value="">Selecione uma opção</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="idUnidade">Unidade</label>
+                        <select class="form-control" id="idUnidade" name="idUnidade">
+                            <option value="">Selecione uma opção</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Faturado</label>
+                        <input type="text" class="form-control" value="" id="faturado" placeholder="Faturado" name="faturado">
+                    </div>
+                    <div class="form-group">
+                        <label for="descricaoAtividade">Descrição</label>
+                        <textarea class="form-control" id="descricaoAtividade" name="descricaoAtividade" rows="5"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" type="submit">Cadastrar</button>
+                    <button class="btn btn-primary" type="submit">Adicionar</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
 <script src="{{asset('js/operacao.js')}}"></script>
-<script src="{{asset('js/atividades/editarAtividades.js')}}"></script>
+<script src="{{asset('js/atividades/atividadeUnicaAdm.js')}}"></script>
+
 @endif
 
-
-<script src="{{asset('js/atividades/visualizarAtividades.js')}}"></script>
+<script src="{{asset('js/projetos/visualizarProjetos.js')}}"></script>
 
 @endsection

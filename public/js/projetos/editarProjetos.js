@@ -1,15 +1,3 @@
-$(document).ready(function () {
-    $("li.nav-item").each(function () {
-        $(this).removeClass('active');
-    });
-
-    // $("div.collapse").each(function () {
-    //     $(this).removeClass('show');
-    // });
-
-    $("a[data-to=projetos1]").trigger('click');
-});
-
 function editarProjeto(idProjeto, nomeProjeto) {
     $("#nomeProjeto").val(nomeProjeto);
     $("#idProjeto").val(idProjeto);
@@ -31,7 +19,7 @@ function deletarProjeto(idProjeto) {
         if (result.value) {
             $.ajax({
                 type: 'POST',
-                url: url_atual + "/deletarProjeto",
+                url: "/deletarProjeto",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -53,4 +41,8 @@ function deletarProjeto(idProjeto) {
         }
     })
 
+}
+
+function openModalAddProjeto() {
+    $("#addProjeto").modal('show');
 }

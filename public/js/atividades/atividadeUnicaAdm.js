@@ -1,9 +1,5 @@
 $(document).ready(function () {
-    $("li.nav-item").each(function () {
-        $(this).removeClass('active');
-    });
-
-    $("a[data-to=atividades3]").trigger('click');
+   
 
 });
 
@@ -41,7 +37,7 @@ function deletarAtividadeUnica(idAtividade) {
         if (result.value) {
             $.ajax({
                 type: 'POST',
-                url: url_atual + "/deletarAtividade2",
+                url: "/deletarAtividade2",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },

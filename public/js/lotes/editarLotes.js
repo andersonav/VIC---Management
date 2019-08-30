@@ -1,12 +1,3 @@
-$(document).ready(function () {
-    $("li.nav-item").each(function () {
-        $(this).removeClass('active');
-    });
-
-    $("a[data-to=lotes2]").trigger('click');
-});
-
-
 function editarLote(idProjeto, idLote, nomeLote) {
     getProjetos(idProjeto);
     $("#nomeLote").val(nomeLote);
@@ -30,7 +21,7 @@ function deletarLote(idLote) {
         if (result.value) {
             $.ajax({
                 type: 'POST',
-                url: url_atual + "/deletarLote",
+                url: "/deletarLote",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -54,6 +45,13 @@ function deletarLote(idLote) {
 
 }
 
+function openModalAddLote(idProjeto) {
+    getProjetos(idProjeto);
+
+    $("#addLote").modal('show');
+}
+
+
 
 function getProjetos(idProjeto) {
     $.ajax({
@@ -69,7 +67,7 @@ function getProjetos(idProjeto) {
             for (var i = 0; i < data.length; i++) {
                 $("select#idProjeto").append('<option value="' + data[i].pro_id + '">' + data[i].pro_nome + '</option>');
             }
-            $("#idProjeto").val(idProjeto);
+            $("select#idProjeto").val(idProjeto);
         }
     });
 }

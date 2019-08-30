@@ -48,7 +48,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item{{ (request()->is('home')) ? ' active' : '' }}">
         <a class="nav-link" href="/home">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
@@ -60,10 +60,12 @@
       <!-- Nav Item - Tables -->
       @foreach ($itensMenu as $item)
       @if ($item->men_rota != null)
-      <a class="nav-link" href="{{'/'.$item->men_rota}}" data-to="{{$item->attrId}}">
-        <i class="{{$item->men_icone}}"></i>
-        <span>{{$item->men_nome}}</span>
-      </a>
+      <li class="nav-item{{ (request()->is($item->men_rota.'*')) ? ' active' : '' }}">
+        <a class="nav-link" href="{{'/'.$item->men_rota}}" data-to="{{$item->attrId}}">
+          <i class="{{$item->men_icone}}"></i>
+          <span>{{$item->men_nome}}</span>
+        </a>
+      </li>
       @else
       <li class="nav-item">
         <a class="nav-link collapsed" href="javascript:void(0);" data-to="{{$item->attrId}}" data-toggle="collapse" data-target="#{{$item->attrId}}" aria-expanded="true" aria-controls="collapsePages">

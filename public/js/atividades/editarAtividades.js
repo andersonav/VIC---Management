@@ -1,11 +1,3 @@
-$(document).ready(function () {
-    $("li.nav-item").each(function () {
-        $(this).removeClass('active');
-    });
-
-    $("a[data-to=atividades3]").trigger('click');
-});
-
 function editarAtividade(idAtividade, idLote, codigo, nomeAtividade) {
     getLotes(idLote);
     $("#nomeAtividade").val(nomeAtividade);
@@ -29,7 +21,7 @@ function deletarAtividade(idAtividade) {
         if (result.value) {
             $.ajax({
                 type: 'POST',
-                url: url_atual + "/deletarAtividade",
+                url: "/deletarAtividade",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -53,6 +45,11 @@ function deletarAtividade(idAtividade) {
 
 }
 
+function openModalAddAtividade(idLote) {
+    getLotes(idLote);
+    $("#addAtividade").modal('show');
+}
+
 
 function getLotes(idLote) {
     $.ajax({
@@ -68,7 +65,7 @@ function getLotes(idLote) {
             for (var i = 0; i < data.length; i++) {
                 $("select#idLote").append('<option value="' + data[i].lot_id + '">' + data[i].lot_nome + '</option>');
             }
-            $("#idLote").val(idLote);
+            $("select#idLote").val(idLote);
         }
     });
 }

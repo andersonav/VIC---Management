@@ -16,7 +16,7 @@ class SuperAdminController extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            if (Auth::user()->tip_usu_id != 1) {
+            if (!Auth::check() || Auth::user()->tip_usu_id != 1) {
                 Redirect::to('home')->send();
             }
             return $next($request);

@@ -72,16 +72,17 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <input type="hidden" class="form-control" value="{{$idAtividade or ''}}" id="idAtividadeProv" name="idAtividadeProv">
-            <h6 class="m-0 font-weight-bold text-primary">Edição da Atividade {{$nomeAtividade or ''}}</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Visualização da Atividade {{$nomeAtividade or ''}} <br />Lote {{$nomeLote or ''}} <br /> Projeto {{$nomeProjeto or ''}}</h6>
         </div>
         <div class="card-body">
-            <a href="{{ route('editarAtividades') }}" class="btn btn-primary btn-icon-split" style="" id="">
+            <a href="JavaScript: window.history.back();" class="btn btn-primary btn-icon-split" style="float: right;" id="">
                 <span class="icon text-white-50">
                     <i class="fas fa-chevron-circle-left"></i>
                 </span>
                 <span class="text">Voltar</span>
             </a>
-            <a href="javascript:void(0);" class="btn btn-primary btn-icon-split" style="float: right;" id="btnAddAtividade" onclick="openModalAddAtividade();">
+
+            <a href="javascript:void(0);" class="btn btn-success btn-icon-split" style="float: right; margin-right: 20px;" id="btnAddAtividade" onclick="openModalAddAtividade();">
                 <span class="icon text-white-50">
                     <i class="fas fa-plus"></i>
                 </span>
@@ -102,7 +103,9 @@
                             <th>Orçamento</th>
                             <th>Faturado</th>
                             <th>Percentagem </th>
+                            @if(auth()->user()->tip_usu_id != 3)
                             <th>Ações</th>
+                            @endif
                         </tr>
                     </thead>
                     <tfoot>
@@ -117,7 +120,9 @@
                             <th>Orçamento</th>
                             <th>Faturado</th>
                             <th>Percentagem </th>
+                            @if(auth()->user()->tip_usu_id != 3)
                             <th>Ações</th>
+                            @endif
                         </tr>
                     </tfoot>
                     <tbody>
@@ -133,16 +138,18 @@
                             <td>{{$atividadeUnica->orcamento or '-'}}</td>
                             <td>{{$atividadeUnica->faturado or '-'}}</td>
                             <td>{{$atividadeUnica->percentagem or '-'}}</td>
+                            @if(auth()->user()->tip_usu_id != 3)
                             <td>
                                 <a class="aEdit" style="cursor: pointer;" title="Editar" onclick="editarAtividadeUnica({{$atividadeUnica->ati2_id}}, {{$atividadeUnica->uni_id}}, {{$atividadeUnica->ati1_id}}, '{{$atividadeUnica->ati2_codigo}}', '{{$atividadeUnica->ati2_descricao}}', '{{$atividadeUnica->ati2_preco_unidade}}', '{{$atividadeUnica->ati2_quantidade}}', '{{$atividadeUnica->valorFaturado}}')"><i class="fas fa-edit fa-sm"></i></a>&nbsp;&nbsp;&nbsp;
                                 @if(auth()->user()->tip_usu_id == 1)
                                 <a class="aDelete" style="cursor: pointer;" title="Deletar" onclick="deletarAtividadeUnica({{$atividadeUnica->ati2_id}})"><i class="fas fa-trash fa-sm"></i></a>
                                 @endif
                             </td>
+                            @endif
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="11" style="text-align: center;">Não há registros</td>
+                            <td colspan="10" style="text-align: center;">Não há registros</td>
                         </tr>
 
                         @endforelse
@@ -155,6 +162,7 @@
     <!-- /.container-fluid -->
 </div>
 
+@if(auth()->user()->tip_usu_id != 3)
 <div class="modal fade" id="editarAtividadeUnica" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form id="logout-form" action="{{ route('editarAtividade2') }}" method="POST" style="">
@@ -272,5 +280,9 @@
 </div>
 <script src="{{asset('js/operacao.js')}}"></script>
 <script src="{{asset('js/atividades/atividadeUnicaAdm.js')}}"></script>
+
+@endif
+
+<script src="{{asset('js/projetos/visualizarProjetos.js')}}"></script>
 
 @endsection
