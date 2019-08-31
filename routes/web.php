@@ -15,19 +15,22 @@ Route::get('/', function () {
     return redirect('home');
 });
 
+Route::resource('users', 'UsersController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-/* USER */
 
-/* VISUALIZAÇÃO */
-
-
+Route::get('/projetos', 'ProjetosController@index')->name('visualizarProjetos');
+Route::post('/projetos/store', 'ProjetosController@store')->name('storeProjetos');
 
 
-Route::get('/projetos', 'UserController@visualizarProjetos')->name('visualizarProjetos');
+
+
+
+
 Route::get('/projetos/{id}', 'UserController@visualizarProjetoUnico')->name('visualizarProjetoUnico');
 Route::get('/projetos/{idProjeto}/lote/{idLote}', 'UserController@visualizarProjetoLoteUnico')->name('visualizarProjetoLoteUnico');
 Route::get('/projetos/{idProjeto}/lote/{idLote}/atividade/{idAtividade}', 'UserController@visualizarProjetoLoteAtividadeUnico')->name('visualizarProjetoLoteAtividadeUnico');

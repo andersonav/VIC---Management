@@ -101,9 +101,8 @@ class UserController extends Controller
         $itensMenu = $this->sidebar(Auth::user()->tip_usu_id);
 
 
-        $single = Atividade2::where('atividade1.ati1_id', $idAtividade)->where('projeto.pro_id', $idProjeto)
+        $single = Atividade1::where('atividade1.ati1_id', $idAtividade)->where('projeto.pro_id', $idProjeto)
             ->where('lote.lot_id', $idLote)
-            ->join('atividade1', 'atividade1.ati1_id', 'atividade2.ati1_id')
             ->join('lote', 'lote.lot_id', 'atividade1.lot_id')
             ->join('projeto', 'projeto.pro_id', 'lote.pro_id')
             ->get();
