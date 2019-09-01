@@ -61,10 +61,9 @@ class LotesController extends Controller
         WHERE projeto.pro_id = ?', [$request->idProjeto]);
 
         return DataTables::of($getlotes)->setRowId('{{$lot_id}}')
-            ->addColumn('orcamento', '{{$orcamento or "-"}}')
             ->addColumn('detalhes', '<a class="aVer" style="cursor: pointer;" title="Ver" href="{{route("atividade1PorLote", ["idProjeto" => $pro_id, "idLote" => $lot_id])}}"><i class="fas fa-eye"></i></a>')
             ->rawColumns(['detalhes', 'action'])
-            ->make();
+            ->make(true);
     }
 
 

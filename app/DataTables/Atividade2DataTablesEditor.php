@@ -19,12 +19,12 @@ class Atividade2DataTablesEditor extends DataTablesEditor
     public function createRules()
     {
         return [
-            'ati1_id' => 'sometimes|required',
+            'ati1_id' => 'sometimes|required|',
             'ati2_codigo' => 'sometimes|required',
             'ati2_descricao' => 'sometimes|required',
-            'ati2_preco_unidade' => 'sometimes|required',
-            'ati2_quantidade' => 'sometimes|required',
-            'ati2_faturado' => 'sometimes|required',
+            'ati2_preco_unidade' => 'sometimes|required|numeric|between:0,999999.99',
+            'ati2_quantidade' => 'sometimes|required|numeric',
+            'ati2_faturado' => 'sometimes|required|numeric',
             'uni_id' => 'sometimes|required',
         ];
     }
@@ -41,9 +41,9 @@ class Atividade2DataTablesEditor extends DataTablesEditor
             'ati1_id' => 'sometimes|required',
             'ati2_codigo' => 'sometimes|required',
             'ati2_descricao' => 'sometimes|required',
-            'ati2_preco_unidade' => 'sometimes|required',
-            'ati2_quantidade' => 'sometimes|required',
-            'ati2_faturado' => 'sometimes|required',
+            'ati2_preco_unidade' => 'sometimes|required|numeric|between:0,999999.99',
+            'ati2_quantidade' => 'sometimes|required|numeric',
+            'ati2_faturado' => 'sometimes|required|numeric',
             'uni_id' => 'sometimes|required',
         ];
     }

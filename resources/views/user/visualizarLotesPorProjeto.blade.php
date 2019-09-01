@@ -113,6 +113,10 @@
             editor.inline(this);
         });
 
+        editor.on('create', function(e, json, data) {
+            location.reload();
+        });
+
     })
 
 

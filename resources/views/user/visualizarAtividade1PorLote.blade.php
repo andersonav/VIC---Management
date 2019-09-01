@@ -152,6 +152,11 @@
             });
         });
 
+
+        editor.on('create', function(e, json, data) {
+            location.reload();
+        });
+
     });
 
     function createChild(row) {
@@ -265,6 +270,13 @@
                 $(row.cell(row.id(true), 0).node()).click();
             });
         });
+
+        atividade2.on('create', function(e, json, data) {
+            location.reload();
+        });
+
+
+
     }
 
     function destroyChild(row) {
