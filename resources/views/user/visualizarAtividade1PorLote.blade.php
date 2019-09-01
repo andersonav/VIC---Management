@@ -82,12 +82,12 @@
                 {
                     data: 'pro_id',
                     title: 'Projeto ID',
-                    defaultContent: '',
+                    defaultContent: "{{$idProjeto}}",
                 },
                 {
                     data: 'lot_id',
                     title: 'Lote ID',
-                    defaultContent: '',
+                    defaultContent: "{{$idLote}}",
                 },
                 {
                     data: 'ati1_codigo',
