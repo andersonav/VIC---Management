@@ -11754,6 +11754,21 @@ form.user .btn-user {
   width: 28.5rem;
 }
 
+td.details-control {
+  background: url(/details_open.png) no-repeat center center;
+  cursor: pointer;
+}
+
+td.details-control {
+  background: url(/details_open.png) no-repeat center center;
+  cursor: pointer;
+}
+
+td.details-control.shown {
+  background: url(/details_close.png) no-repeat center center;
+  cursor: pointer;
+}
+
 @-webkit-keyframes noise-anim {
   0% {
     clip: rect(89px, 9999px, 100px, 0);

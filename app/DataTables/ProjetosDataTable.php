@@ -70,7 +70,7 @@ class ProjetosDataTable extends DataTable
 
                 return $newQuery[0]->percentagem;
             })
-            ->addColumn('detalhes', '<a class="aVer" style="cursor: pointer;" title="Ver" href="{{route("visualizarProjetoUnico", ["id" => $pro_id])}}">Ver</a>')
+            ->addColumn('detalhes', '<a class="aVer" style="cursor: pointer;" title="Ver" href="{{route("lotesPorProjeto", ["id" => $pro_id])}}"><i class="fas fa-eye"></i></a>')
             ->rawColumns(['detalhes', 'action']);
     }
 
@@ -82,21 +82,6 @@ class ProjetosDataTable extends DataTable
      */
     public function query(Projeto $model)
     {
-
-        $getProjetos = DB::select('SELECT pro.pro_id, pro.pro_nome,
-        (SELECT SUM(ati2_quantidade * ati2_preco_unidade) from atividade2
-        INNER JOIN atividade1 ON atividade2.ati1_id = atividade1.ati1_id
-        INNER JOIN lote ON atividade1.lot_id = lote.lot_id
-        WHERE pro.pro_id = lote.pro_id) as valorOrcamento,
-        (SELECT SUM(ati2_faturado) from atividade2
-        INNER JOIN atividade1 ON atividade2.ati1_id = atividade1.ati1_id
-        INNER JOIN lote ON atividade1.lot_id = lote.lot_id
-        WHERE pro.pro_id = lote.pro_id) as valorFaturado,
-        (SELECT ((valorFaturado * 100) / valorOrcamento )) as symbolPercentagem,
-        (SELECT CONCAT(FORMAT(valorOrcamento, 2), " €")) as orcamento,
-        (SELECT CONCAT(FORMAT(valorFaturado, 2), " €")) as faturado,
-        (SELECT CONCAT(FORMAT(symbolPercentagem, 2), " %")) as percentagem
-        from projeto pro');
 
         return $model->newQuery()->select('projeto.pro_id', 'pro_nome', 'lote.lot_id')->leftJoin('lote', 'lote.pro_id', 'projeto.pro_id');
     }
