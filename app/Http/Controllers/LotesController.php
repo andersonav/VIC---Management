@@ -8,10 +8,27 @@ use App\DataTables\LotesDataTable;
 use App\DataTables\LotesDataTablesEditor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use App\Projeto;
-
+use App\Lote;
 class LotesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Auth::check()) {
+                Redirect::to('home')->send();
+            }
+            return $next($request);
+        });
+    }
+
+    public function getLotes()
+    {
+        $lotes = Lote::get();
+        return response()->json($lotes);
+    }
+
     public function index(LotesDataTable $dataTable, $idProjeto)
     {
         $itensMenu = $this->sidebar(Auth::user()->tip_usu_id);

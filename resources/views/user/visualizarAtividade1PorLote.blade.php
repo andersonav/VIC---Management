@@ -115,19 +115,7 @@
                 style: 'os',
                 selector: 'td:not(:first-child)'
             },
-            buttons: [{
-                    extend: 'create',
-                    editor: editor
-                },
-                {
-                    extend: 'edit',
-                    editor: editor
-                },
-                {
-                    extend: 'remove',
-                    editor: editor
-                }
-            ]
+            buttons: getButtons(editor)
         });
 
         var detailRows = [];
@@ -269,19 +257,7 @@
                 }
             ],
             select: true,
-            buttons: [{
-                    extend: 'create',
-                    editor: atividade2
-                },
-                {
-                    extend: 'edit',
-                    editor: atividade2
-                },
-                {
-                    extend: 'remove',
-                    editor: atividade2
-                }
-            ]
+            buttons: getButtons(atividade2)
         });
 
         atividade2.on('submitSuccess', function(e, json, data, action) {
@@ -370,4 +346,59 @@
         return json;
     }
 </script>
+
+
+@if(auth()->user()->tip_usu_id == 3)
+<script>
+    function getButtons(atividade2) {
+        return [{
+
+        }]
+    }
+</script>
+@endif
+
+@if(auth()->user()->tip_usu_id == 2)
+<script>
+    function getButtons(atividade2) {
+        return [{
+                extend: 'create',
+                editor: atividade2
+            },
+            {
+                extend: 'edit',
+                editor: atividade2
+            },
+            {
+                extend: 'remove',
+                editor: atividade2
+            }
+        ]
+    }
+</script>
+@endif
+
+@if(auth()->user()->tip_usu_id == 1)
+<script>
+    function getButtons(atividade2) {
+        return [{
+                extend: 'create',
+                editor: atividade2
+            },
+            {
+                extend: 'edit',
+                editor: atividade2
+            },
+            {
+                extend: 'remove',
+                editor: atividade2
+            }
+        ]
+    }
+</script>
+@endif
+
+
+
+
 @endsection

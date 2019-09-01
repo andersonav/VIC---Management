@@ -20,6 +20,7 @@
     </div>
 </div>
 <script>
+    var jsonTest = [];
     $(function() {
 
         var dataProjeto = getProjetos();
@@ -43,7 +44,7 @@
                 name: "pro_id",
                 type: "select",
                 placeholder: "Select a projeto",
-                options: dataProjeto,
+                options: jsonTest,
                 def: "{{$idProjeto}}"
             }, {
                 label: "Nome do Lote:",
@@ -104,19 +105,7 @@
                 style: 'os',
                 selector: 'td:first-child'
             },
-            buttons: [{
-                    extend: 'create',
-                    editor: editor
-                },
-                {
-                    extend: 'edit',
-                    editor: editor
-                },
-                {
-                    extend: 'remove',
-                    editor: editor
-                }
-            ]
+            buttons: getButtons(editor)
         });
 
 
@@ -128,7 +117,6 @@
 
 
     function getProjetos() {
-        var json = [];
         $.ajax({
             type: 'POST',
             url: "/getProjetos",
@@ -138,15 +126,74 @@
             },
             data: {},
             success: function(data, textStatus, jqXHR) {
-                for (var i = 0; i < data.length; i++) {
-                    json[i] = {
-                        label: data[i].pro_nome,
-                        value: data[i].pro_id
-                    }
-                }
+                preencherArray(data);
             }
         });
-        return json;
+    }
+
+    function preencherArray(data) {
+        for (var i = 0; i < data.length; i++) {
+            jsonTest[i] = {
+                label: data[i].pro_nome,
+                value: data[i].pro_id
+            }
+        }
     }
 </script>
+
+
+
+
+@if(auth()->user()->tip_usu_id == 3)
+<script>
+    function getButtons(atividade2) {
+        return [{
+
+        }]
+    }
+</script>
+@endif
+
+@if(auth()->user()->tip_usu_id == 2)
+<script>
+    function getButtons(atividade2) {
+        return [{
+                extend: 'create',
+                editor: atividade2
+            },
+            {
+                extend: 'edit',
+                editor: atividade2
+            },
+            {
+                extend: 'remove',
+                editor: atividade2
+            }
+        ]
+    }
+</script>
+@endif
+
+@if(auth()->user()->tip_usu_id == 1)
+<script>
+    function getButtons(atividade2) {
+        return [{
+                extend: 'create',
+                editor: atividade2
+            },
+            {
+                extend: 'edit',
+                editor: atividade2
+            },
+            {
+                extend: 'remove',
+                editor: atividade2
+            }
+        ]
+    }
+</script>
+@endif
+
+
+
 @endsection

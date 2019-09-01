@@ -38,7 +38,7 @@ Route::post('/projetos/lote/atividade1/store', 'Atividade1Controller@store')->na
 Route::post('/projetos/lote/atividade1/getAtividade2', 'Atividade2Controller@returnJson')->name('atividade2PorAtividade1');
 Route::post('/projetos/lote/atividade1/atividade2/store', 'Atividade2Controller@store')->name('storeAtividades2');
 
-Route::post('/getProjetos', 'AdminController@getProjetos')->name('getProjetos');
-Route::post('/getLotes', 'AdminController@getLotes')->name('getLotes');
-Route::post('/getAtividade1', 'AdminController@getAtividade1')->name('getAtividade1');
-Route::post('/getUnidade', 'AdminController@getUnidade')->name('getUnidade');
+Route::post('/getProjetos', 'ProjetosController@getProjetos')->name('getProjetos');
+Route::post('/getLotes', 'LotesController@getLotes')->name('getLotes');
+Route::post('/getAtividade1', 'Atividade1Controller@getAtividade1')->name('getAtividade1');
+Route::post('/getUnidade', 'Atividade1Controller@getUnidade')->name('getUnidade');

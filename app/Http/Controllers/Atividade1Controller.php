@@ -7,10 +7,35 @@ use Yajra\DataTables\Facades\DataTables;
 use App\DataTables\Atividade1DataTable;
 use App\DataTables\Atividade1DataTablesEditor;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use App\Atividade1;
 
 class Atividade1Controller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Auth::check()) {
+                Redirect::to('home')->send();
+            }
+            return $next($request);
+        });
+    }
+
+    public function getAtividade1()
+    {
+        $atividades1 = Atividade1::get();
+        return response()->json($atividades1);
+    }
+    
+    public function getUnidade()
+    {
+        $unidades = DB::table('unidade')->get();
+        return response()->json($unidades);
+    }
+
+
     public function index($idProjeto, $idLote)
     {
         $itensMenu = $this->sidebar(Auth::user()->tip_usu_id);
@@ -37,7 +62,7 @@ class Atividade1Controller extends Controller
         INNER JOIN lote ON lote.lot_id = atividade1.lot_id
         INNER JOIN projeto ON projeto.pro_id = lote.pro_id
         WHERE lote.lot_id = ? AND projeto.pro_id = ?', [$request->idProjeto, $request->idLote]);
-    
+
         return DataTables::of($getProjetos)->setRowId('{{$ati1_id}}')->make();
     }
 

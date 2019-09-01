@@ -24,8 +24,8 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.0/css/buttons.bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.4/css/select.bootstrap.min.css">
 
-  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-  <!-- <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script> -->
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
+  <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
 
   <!-- Core plugin JavaScript-->
   <script src="{{asset('js/sweetalert2.js')}}"></script>

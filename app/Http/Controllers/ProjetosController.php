@@ -7,9 +7,29 @@ use App\DataTables\ProjetosDataTable;
 use App\DataTables\ProjetosDataTablesEditor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Projeto;
+use Illuminate\Support\Facades\Redirect;
 
 class ProjetosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Auth::check()) {
+                Redirect::to('home')->send();
+            }
+            return $next($request);
+        });
+    }
+
+    public function getProjetos()
+    {
+        $projetos = Projeto::get();
+        return response()->json($projetos);
+    }
+
+
+
     public function index(ProjetosDataTable $dataTable)
     {
         $itensMenu = $this->sidebar(Auth::user()->tip_usu_id);

@@ -5,10 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\DataTables\Atividade2DataTablesEditor;
+use Illuminate\Support\Facades\Redirect;
 use Yajra\DataTables\Facades\DataTables;
-
+use Illuminate\Support\Facades\Auth;
 class Atividade2Controller extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Auth::check()) {
+                Redirect::to('home')->send();
+            }
+            return $next($request);
+        });
+    }
 
     public function store(Atividade2DataTablesEditor $editor, Request $request)
     {

@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Projeto;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ProjetosDataTable extends DataTable
 {
@@ -103,11 +104,7 @@ class ProjetosDataTable extends DataTable
                     'style' => 'os',
                     'selector' => 'td:first-child',
                 ],
-                'buttons' => [
-                    ['extend' => 'create', 'editor' => 'editor'],
-                    ['extend' => 'edit', 'editor' => 'editor'],
-                    ['extend' => 'remove', 'editor' => 'editor'],
-                ]
+                'buttons' => $this->getButtons()
             ]);
     }
 
@@ -135,6 +132,28 @@ class ProjetosDataTable extends DataTable
             'detalhes'
         ];
     }
+
+    protected function getButtons()
+    {
+        if (Auth::user()->tip_usu_id == 3) {
+            return [];
+        } elseif (Auth::user()->tip_usu_id == 2) {
+            return [
+                ['extend' => 'create', 'editor' => 'editor'],
+                ['extend' => 'edit', 'editor' => 'editor'],
+                ['extend' => 'remove', 'editor' => 'editor'],
+            ];
+        } else {
+            return [
+                ['extend' => 'create', 'editor' => 'editor'],
+                ['extend' => 'edit', 'editor' => 'editor'],
+                ['extend' => 'remove', 'editor' => 'editor'],
+            ];
+        }
+    }
+
+
+
 
     /**
      * Get filename for export.

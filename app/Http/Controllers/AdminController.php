@@ -23,29 +23,11 @@ class AdminController extends Controller
         });
     }
 
-    public function getProjetos()
-    {
-        $projetos = Projeto::get();
-        return response()->json($projetos);
-    }
+    
+   
+    
 
-    public function getLotes()
-    {
-        $lotes = Lote::get();
-        return response()->json($lotes);
-    }
-
-    public function getAtividade1()
-    {
-        $atividades1 = Atividade1::get();
-        return response()->json($atividades1);
-    }
-
-    public function getUnidade()
-    {
-        $unidades = DB::table('unidade')->get();
-        return response()->json($unidades);
-    }
+    
 
 
     public function editarProjetos()
